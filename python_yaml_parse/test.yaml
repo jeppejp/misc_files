@@ -1,0 +1,31 @@
+      time: 2016-06-20 22:33:29.408694 +02:00
+      events: 
+        - !ruby/object:Puppet::Transaction::Event
+          audited: false
+          property: ensure
+          previous_value: !ruby/sym absent
+          desired_value: !ruby/sym present
+          historical_value: 
+          message: created
+          name: !ruby/sym package_installed
+          status: success
+          time: 2016-06-20 22:33:29.433947 +02:00
+      out_of_sync: true
+      changed: true
+      resource_type: Package
+      title: terminator
+      skipped: false
+      failed: false
+      containment_path: 
+        - Stage[main]
+        - Main
+        - Package[terminator]
+  host: localhost.mynet
+  time: 2016-06-20 22:33:29.286357 +02:00
+  kind: apply
+  report_format: 4
+  puppet_version: "3.8.7"
+  configuration_version: 1466454808
+  transaction_uuid: "32437efa-983f-40fd-8f98-3838ee7aee78"
+  environment: production
+  status: changed

@@ -1,0 +1,272 @@
+--- 
+  metrics: 
+    resources: 
+      name: resources
+      label: Resources
+      values: 
+        - - total
+          - Total
+          - 8
+        - - skipped
+          - Skipped
+          - 0
+        - - failed
+          - Failed
+          - 0
+        - - failed_to_restart
+          - "Failed to restart"
+          - 0
+        - - restarted
+          - Restarted
+          - 0
+        - - changed
+          - Changed
+          - 1
+        - - out_of_sync
+          - "Out of sync"
+          - 1
+        - - scheduled
+          - Scheduled
+          - 0
+    time: 
+      name: time
+      label: Time
+      values: 
+        - - schedule
+          - Schedule
+          - 0.000295097
+        - - filebucket
+          - Filebucket
+          - 7.57e-05
+        - - package
+          - Package
+          - 30.846725457
+        - - config_retrieval
+          - "Config retrieval"
+          - 0.3753431
+        - - total
+          - Total
+          - 31.222439354
+    changes: 
+      name: changes
+      label: Changes
+      values: 
+        - - total
+          - Total
+          - 1
+    events: 
+      name: events
+      label: Events
+      values: 
+        - - total
+          - Total
+          - 1
+        - - failure
+          - Failure
+          - 0
+        - - success
+          - Success
+          - 1
+  logs: 
+    - 
+      level:  notice
+      tags: 
+        - notice
+        - package
+        - terminator
+        - class
+      message: created
+      source: /Stage[main]/Main/Package[terminator]/ensure
+      time: 2016-06-20 22:34:00.255217 +02:00
+      file: /home/jjp/Desktop/centos_manifest.pp
+      line: 3
+    - 
+      level:  notice
+      tags: 
+        - notice
+      message: "Finished catalog run in 30.97 seconds"
+      source: Puppet
+      time: 2016-06-20 22:34:00.263012 +02:00
+  resource_statuses: 
+    Schedule[daily]: 
+      resource: Schedule[daily]
+      file: 
+      line: 
+      evaluation_time: 6.2539e-05
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - daily
+      time: 2016-06-20 22:33:29.291817 +02:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: daily
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[daily]
+    Schedule[monthly]: 
+      resource: Schedule[monthly]
+      file: 
+      line: 
+      evaluation_time: 4.0788e-05
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - monthly
+      time: 2016-06-20 22:33:29.291957 +02:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: monthly
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[monthly]
+    Schedule[hourly]: 
+      resource: Schedule[hourly]
+      file: 
+      line: 
+      evaluation_time: 3.7006e-05
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - hourly
+      time: 2016-06-20 22:33:29.292067 +02:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: hourly
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[hourly]
+    Schedule[never]: 
+      resource: Schedule[never]
+      file: 
+      line: 
+      evaluation_time: 4.5894e-05
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - never
+      time: 2016-06-20 22:33:29.292723 +02:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: never
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[never]
+    Filebucket[puppet]: 
+      resource: Filebucket[puppet]
+      file: 
+      line: 
+      evaluation_time: 7.57e-05
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - filebucket
+        - puppet
+      time: 2016-06-20 22:33:29.292892 +02:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Filebucket
+      title: puppet
+      skipped: false
+      failed: false
+      containment_path: 
+        - Filebucket[puppet]
+    Schedule[weekly]: 
+      resource: Schedule[weekly]
+      file: 
+      line: 
+      evaluation_time: 4.4175e-05
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - weekly
+      time: 2016-06-20 22:33:29.293046 +02:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: weekly
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[weekly]
+    Schedule[puppet]: 
+      resource: Schedule[puppet]
+      file: 
+      line: 
+      evaluation_time: 6.4695e-05
+      change_count: 0
+      out_of_sync_count: 0
+      tags: 
+        - schedule
+        - puppet
+      time: 2016-06-20 22:33:29.293202 +02:00
+      events: []
+      out_of_sync: false
+      changed: false
+      resource_type: Schedule
+      title: puppet
+      skipped: false
+      failed: false
+      containment_path: 
+        - Schedule[puppet]
+    Package[terminator]: 
+      resource: Package[terminator]
+      file: /home/jjp/Desktop/centos_manifest.pp
+      line: 3
+      evaluation_time: 30.846725457
+      change_count: 1
+      out_of_sync_count: 1
+      tags: 
+        - package
+        - terminator
+        - class
+      time: 2016-06-20 22:33:29.408694 +02:00
+      events: 
+        - 
+          audited: false
+          property: ensure
+          previous_value:  absent
+          desired_value:  present
+          historical_value: 
+          message: created
+          name:  package_installed
+          status: success
+          time: 2016-06-20 22:33:29.433947 +02:00
+      out_of_sync: true
+      changed: true
+      resource_type: Package
+      title: terminator
+      skipped: false
+      failed: false
+      containment_path: 
+        - Stage[main]
+        - Main
+        - Package[terminator]
+  host: localhost.mynet
+  time: 2016-06-20 22:33:29.286357 +02:00
+  kind: apply
+  report_format: 4
+  puppet_version: "3.8.7"
+  configuration_version: 1466454808
+  transaction_uuid: "32437efa-983f-40fd-8f98-3838ee7aee78"
+  environment: production
+  status: changed
