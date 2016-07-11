@@ -3,6 +3,11 @@ import yaml
 import argparse
 import os
 
+# run with sudo or as root
+# requires that pyyaml is installed
+# Examples:
+# sudo python parse.py --servername host.name          ( Display events that triggered a "changed" or "failed" state)
+# sudo python parse.py --servername host.name --all    ( Same as above but display everything )
 
 parser = argparse.ArgumentParser(description="parse puppet reports into a more human readable format")
 
