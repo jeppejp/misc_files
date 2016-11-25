@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-stats = {"scored": 0, "not_scored": 0, "failed": 0}
+stats = {"scored": 0, "not_scored": 0, "scored_failed": 0, "not_scored_failed": 0}
 
 debugFlag = False
 if "-d" in sys.argv:
@@ -37,9 +37,20 @@ def test(func, scored):
         else:
             stats["not_scored"] += 1
     else:
-        stats["failed"] += 1
+        if scored:
+            stats["scored_failed"] += 1
+        else:
+            stats["not_scored_failed"] += 1
     print func.__name__ + " " + str(res)
 
+def printStats():
+    global stats
+    t_scored = stats["scored"]+stats["scored_failed"]
+    t_not_scored = stats["not_scored"] + stats["not_scored_failed"]
+    
+    print "Scored: " +str(stats["scored"]) + "/"+str(t_scored)
+    print "Not scored: " +str(stats["not_scored"]) + "/"+str(t_not_scored)
+    print "Total : " + str(stats["not_scored"]+stats["scored"]) + "/" + str(t_scored+t_not_scored)
 
 def cis1111():
     return checkModuleIsNotLoadable("cramfs")
@@ -213,9 +224,115 @@ def cis1_1_22():
     return False
 test(cis1_1_22, True)
 
+def cis1_2_1():
+    #Systems need to have package manager repositories configured to ensure they receive the latest patches and updates.
+    r = runCmd("yum repolist")
+    if len(r.split("\n")) > 2:  # simply verify that we have some repos enabled... weak test
+        return True
+    return False
+test(cis1_2_1, False)
 
+def cis1_2_2():
+    r = runCmd("rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release} --> %{summary}\n'")
+    if "is not installed" in r:
+        return False
+    return True
+test(cis1_2_2, False)
 
+def cis1_2_3():
+    r = runCmd("grep ^gpgcheck /etc/yum.conf")
+    if "gpgcheck=0" in r.lower() or "gpgcheck=false" in r.lower():
+        return False
+    r = runCmd("grep ^gpgcheck /etc/yum.repos.d/*")
+    if "gpgcheck=false" in r.lower() or "gpgcheck=0" in r.lower():
+        return False
+    return True
+test(cis1_2_3,True)
+    
+def cis1_3_1():
+    r = runCmd("rpm -q aide")
+    if "package aide is not installed" in r:
+        return False
+    return True
+test(cis1_3_1, True)
+    
+def cis1_3_2():
+    r = runCmd("crontab -u root -l | grep aide")
+    if "aide" in r:
+        return True
+    r = runCmd("grep -r aide /etc/cron.* /etc/crontab")
+    if "aide" in r:
+        return True
+    return False
+test(cis1_3_2, True)
+    
+def cis1_4_1():
+    r = runCmd("stat /boot/grub2/grub.cfg | grep Access | grep Uid | egrep [0-9]{4} -o")
+    if "0600" not in r:
+        return False
+    r = runCmd("stat /boot/grub2/grub.cfg | grep Access | egrep \"Uid.+\)[^\(]\" -o")
+    if "root" not in r:
+        return False
+    r = runCmd("stat /boot/grub2/grub.cfg | grep Access | egrep \"Gid.+\)\" -o")
+    if "root" not in r:
+        return False
+    return True
+test(cis1_4_1, True)
 
+def cis1_4_2():
+    r = runCmd("cat /boot/grub2/grub.cfg")
+    if "set superusers" not in r:
+        return False
+    if "password" not in r:
+        return False
+    return True
+test(cis1_4_2, True)
 
+def cis1_4_3():
+    r = runCmd("grep /sbin/sulogin /usr/lib/systemd/system/rescue.service")
+    if "ExecStart" not in r:
+        return False
+    r = runCmd("grep /sbin/sulogin /usr/lib/systemd/system/emergency.service")
+    if "ExecStart" not in r:
+        return False    
+    return True
+test(cis1_4_3, False)
+    
+def cis1_5_1():
+    r = runCmd("grep \"hard core\" /etc/security/limits.conf /etc/security/limits.d/*")
+    if "hard core 0" not in r:
+        return False
+    r = runCmd("sysctl fs.suid_dumpable")
+    if "dumpable = 0" not in r:
+        return False
+    return True
+test(cis1_5_1, True)
 
-print stats
+def cis1_5_2():
+    r = runCmd("dmesg | grep NX")
+    if "protection : active" not in r or "Execute Disable" not in r:
+        return False
+    return True
+test(cis1_5_2, False)
+
+def cis1_5_3():
+    r = runCmd("sysctl kernel.randomize_va_space")
+    if "space = 2" not in r:
+        return False
+    return True
+test(cis1_5_3, True)
+
+def cis1_5_4():
+    r = runCmd("rpm -q prelink")
+    if "is not installed" in r:
+        return True
+    return False
+test(cis1_5_4, True)
+
+def cis1_6_1_1():
+    r = runCmd("cat /boot/grub2/grub.cfg")
+    if "selinux=0" in r or "enforcing=0" in r:
+        return False
+    
+    
+printStats()
