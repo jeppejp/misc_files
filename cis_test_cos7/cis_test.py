@@ -333,6 +333,62 @@ def cis1_6_1_1():
     r = runCmd("cat /boot/grub2/grub.cfg")
     if "selinux=0" in r or "enforcing=0" in r:
         return False
-    
-    
+    return True
+test(cis1_6_1_1, True)
+
+def cis1_6_1_2():
+    r = runCmd("grep SELINUX=enforcing /etc/selinux/config")
+    if "SELINUX=enforcing" not in r:
+        return False
+    r = runCmd("sestatus")      ## TODO!! verify the output of sestatus
+    if "enabled" not in r.lower():
+        return False
+    if r.lower().count("enforcing") != 2:
+        return False
+    return True
+test(cis1_6_1_2, True)
+
+def cis1_6_1_3():
+    r = runCmd("grep SELINUXTYPE= /etc/selinux/config")
+    if "targeted" not in r and "mls" not in r:
+        return False
+    r = runCmd("sestatus")  ## TODO as above
+    if "mls" not in r and "targeted" not in r:
+        return False
+    return True
+test(cis1_6_1_3, True)
+
+def cis1_6_1_4():
+    r = runCmd("rpm -q setroubleshoot")
+    if "is not installed" not in r:
+        return False
+    return True
+test(cis1_6_1_4,True)
+
+def cis1_6_1_5():
+    r = runCmd("rpm -q mcstrans")
+    if "not installed" not in r:
+        return False
+    return True
+test(cis1_6_1_5, True)
+
+def cis1_6_1_6():
+    r = runCmd("ps -eZ | egrep \"initrc\" | egrep -vw \"tr|ps|egrep|bash|awk\" | tr ':' ' ' | awk '{ print $NF }'")
+    if r != "":
+        return False
+    return True
+test(cis1_6_1_6,True)
+
+def cis1_6_2():
+    r = runCmd("rpm -q libselinux")
+    if "not installed" in r:
+        return False
+    return True
+test(cis1_6_2, True)
+
+
+
+
+
+
 printStats()
