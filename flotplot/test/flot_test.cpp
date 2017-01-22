@@ -50,7 +50,7 @@ void FileReaderTestCase::filenotfound ()
 
 void FileReaderTestCase::filefound()
 {
-    Filereader fr("100points.txt");
+    Filereader fr("test/100points.txt");
     CPPUNIT_ASSERT_EQUAL(true, fr.readFile());
 }
 
