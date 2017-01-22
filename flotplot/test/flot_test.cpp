@@ -14,6 +14,7 @@ class FileReaderTestCase : public CppUnit::TestCase
     CPPUNIT_TEST_SUITE( FileReaderTestCase );
     CPPUNIT_TEST( filenotfound );
     CPPUNIT_TEST( filefound );
+    CPPUNIT_TEST( splitting );
     CPPUNIT_TEST_SUITE_END();
 
 
@@ -21,6 +22,7 @@ class FileReaderTestCase : public CppUnit::TestCase
     double          m_value2;
     void            filenotfound ();
     void            filefound();
+    void            splitting();
 
     public:
 
@@ -55,7 +57,13 @@ void FileReaderTestCase::filefound()
 }
 
 
+void FileReaderTestCase::splitting()
+{
+    std::vector< std::string > vec;
+    vec = splitLine("her er linjen\n", ' ');
 
+    CPPUNIT_ASSERT_EQUAL((size_t)3, vec.size());
+}
 
 CppUnit::Test *suite()
 {
