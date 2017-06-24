@@ -3,8 +3,9 @@
 #include <vector>
 #include <algorithm>
 #include "Plotdata.hpp"
-typedef std::vector< std::pair<int, int> > timedata;
-typedef std::vector< std::pair<int, int> > plotdata;
+#include <string>
+#include <sstream>
+#include "types.hpp"
 
 timedata test_data(void)
 {
@@ -32,14 +33,24 @@ int main(void)
     timedata tdata;
     tdata = test_data(); 
     Plotdata pd(tdata);
+
+
+    int max_height , max_width;
+    getmaxyx(stdscr, max_height ,max_width);
+
+    pd.setPlotSize(max_height-4, max_width-4);
+    pd.setPlotOffset(2,2);
+
+
+    
     while (true)
     {    
 
-        int max_height , max_width;
-        getmaxyx(stdscr, max_height ,max_width);
+
 
 
         plotdata pdata;
+
 
 
         pdata = pd.getInterpolated(); 
@@ -53,6 +64,9 @@ int main(void)
         int ch = getch();
         if(ch==113)
             break;
+        std::ostringstream s;
+        s << ch;
+        mvaddstr(2,2,s.str().c_str());
     }
 
 

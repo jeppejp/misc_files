@@ -53,4 +53,7 @@ int getNumberOfColums()
     return 0;
 }
 
-
+std::vector< std::string > Filereader::getColumNames()
+{
+    return m_columnNames;
+}
