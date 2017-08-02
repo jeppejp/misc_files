@@ -1,0 +1,7 @@
+URxvt.transparent:   true
+URxvt.tintColor:     white
+URxvt.shading:       20 
+URxvt.scrollBar:     false
+URxvt.foreground:    7
+URxvt.font:          xft:Monospace-10
+URxvt*urgentOnBell: true
