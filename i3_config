@@ -11,7 +11,7 @@
 
 set $mod Mod4
 
-exec --no-startup-id feh --bg-scale /home/jjp/Pictures/stormtrooper.jpg
+exec --no-startup-id feh --bg-scale /home/jjp/Pictures/planet_express.jpg
 exec --no-startup-id xset +dpms
 exec --no-startup-id xset dpms 300
 
@@ -96,7 +96,7 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-new_window pixel 10
+new_window pixel 3
 
 
 client.focused #9fbc00 #9fbc00 #111111 #111111
