@@ -169,4 +169,5 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+#        status_command exec /usr/bin/python -u /home/jjp/git-repos/misc_files/i3bar.py
 }
