@@ -1,3 +1,5 @@
+#!/bin/bash
+
 CURRENT_LAYOUT=$(setxkbmap -query | grep layout | cut -d " " -f 6)
 
 if [[ "$CURRENT_LAYOUT" == gb ]]

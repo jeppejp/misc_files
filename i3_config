@@ -108,7 +108,7 @@ client.urgent #383a3b #383a3b #ee0000
 
 
 # swap keyboard layout
-bindsym $mod+x exec /home/jjp/misc_files/switch_keyboard_layout.sh
+bindsym $mod+x exec /home/jjp/git-repos/misc_files/switch_keyboard_layout.sh
 
 # switch to workspace
 bindsym $mod+1 workspace 1
