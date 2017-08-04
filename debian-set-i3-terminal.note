@@ -1,0 +1,1 @@
+ sudo update-alternatives --set x-terminal-emulator "$(which terminator)"
