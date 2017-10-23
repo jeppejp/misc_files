@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <time.h>
 
 int main(int argc, char **argv)
 {
@@ -16,11 +17,13 @@ int main(int argc, char **argv)
 
     fd_set rfds;
 
-    printf(" %d   %d  \n", fd_mouse, fd_keyboard);
     int rres;
-    printf("looping\n"); 
     tv.tv_sec = 1;
     tv.tv_usec = 500000;
+
+    int state = 1;
+    int last_state = 0;
+    time_t last_active = time(NULL);
 
     while (1)
     {
@@ -40,17 +43,33 @@ int main(int argc, char **argv)
             {
                 printf("mouse\n");
                 rres = read(fd_mouse, &ev, sizeof(ev));
+                last_active = time(NULL);
+                state = 1;
             }
             if(FD_ISSET(fd_keyboard, &rfds))
             {
                 printf("keyboard\n");
                 rres = read(fd_keyboard, &ev, sizeof(ev));
+                last_active = time(NULL);
+                state = 1;
 
             }
         }else{
-            printf("nothing\n");
+            printf("nothing: inactive for %d\n", time(NULL)-last_active);
     tv.tv_sec = 1;
     tv.tv_usec = 500000;
+            if ((time(NULL)-last_active) > 3)
+            {
+                state = 0;
+            }
+        }
+
+        if (state != last_state)
+        {
+            last_state = state;
+            printf("state is now %d\n", state);
+
+
         }
 
     }
