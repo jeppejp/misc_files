@@ -27,7 +27,7 @@ def title_to_name(title, cl):
     if 'vim' in title:
         return 'vim ' + title.replace('vim  ', '')[-10:]
     if 'Firefox-esr' == cl:
-        return 'FF-' + title[:15]
+        return 'WEB-' + title[:15]
     if 'URxvt' == cl:
         return 'term'
     return cl
